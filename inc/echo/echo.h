@@ -10,6 +10,15 @@ typedef struct echo_ctx echo_ctx;
 typedef struct echo_info echo_info;
 
 
+typedef enum {
+    ECHO_LVL_DEBUG,
+    ECHO_LVL_INFO,
+    ECHO_LVL_WARN,
+    ECHO_LVL_ERROR,
+    ECHO_LVL_FATAL
+} echo_lvl;
+
+
 struct echo_info {
     FILE* fs;
     uint32_t len;
@@ -30,6 +39,12 @@ extern "C" {
 #endif // __cplusplus
 int echo_create_ctx(echo_ctx* _ctx);
 void echo_destroy_ctx(echo_ctx* _ctx);
+void echo_log(echo_ctx* _ctx,
+                echo_lvl _lvl,
+                const char* _fname,
+                int _ln,
+                const char* _msg,
+                ...);
 #ifdef __cplusplus
 }
 #endif // __cplusplus

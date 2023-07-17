@@ -38,6 +38,7 @@ int echo_create_ctx(echo_ctx* _ctx) {
 void echo_destroy_ctx(echo_ctx* _ctx) {
     if(!_ctx || !_ctx->buffer) return;
 
+    echo_flush(_ctx);
     free(_ctx->buffer);
     _ctx->buffer = NULL;
 }
@@ -48,6 +49,11 @@ void echo_log(echo_ctx* _ctx,
                 int _ln,
                 const char* _msg,
                 ...) {
+
+    if(_ctx->offset >= (_ctx->info->threshold * _ctx->info->len)) {
+        echo_flush(_ctx);
+    }
+
     int written = sprintf(_ctx->buffer + _ctx->offset,
                             "%s:%d: %s: ",
                             _fname,
@@ -60,7 +66,15 @@ void echo_log(echo_ctx* _ctx,
                         _ctx->info->len,
                         _msg,
                         arg_list);
-    va_end(arg_list);
     _ctx->offset += written;
-    printf("%s\n", _ctx->buffer);
+    strncat(_ctx->buffer, "\n", _ctx->info->len - _ctx->offset - 1);
+    va_end(arg_list);
+    _ctx->offset++;
+}
+
+void echo_flush(echo_ctx* _ctx) {
+    fprintf(_ctx->info->fs, "%s", _ctx->buffer);
+    fflush(_ctx->info->fs);
+    memset(_ctx->buffer, 0, _ctx->info->len);
+    _ctx->offset = 0;
 }

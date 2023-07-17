@@ -45,6 +45,7 @@ void echo_log(echo_ctx* _ctx,
                 int _ln,
                 const char* _msg,
                 ...);
+void echo_flush(echo_ctx* _ctx);
 #ifdef __cplusplus
 }
 #endif // __cplusplus

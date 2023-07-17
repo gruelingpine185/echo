@@ -24,11 +24,6 @@ int echo_create_ctx(echo_ctx* _ctx) {
     if(!_ctx->buffer) return 0;
 
     memset(_ctx->buffer, 0, _ctx->info->len);
-    if(setvbuf(_ctx->info->fs, _ctx->buffer, _IOFBF, _ctx->info->len) != 0) {
-        echo_destroy_ctx(_ctx);
-        return 0;
-    }
-
     _ctx->offset = 0;
     _ctx->warnings = 0;
     _ctx->errors = 0;
@@ -55,7 +50,7 @@ void echo_log(echo_ctx* _ctx,
     }
 
     int written = sprintf(_ctx->buffer + _ctx->offset,
-                            "%s:%d: %s: ",
+                            "%s:%d: [%s]: ",
                             _fname,
                             _ln,
                             lvl_strs[_lvl]);
@@ -63,7 +58,7 @@ void echo_log(echo_ctx* _ctx,
     va_list arg_list;
     va_start(arg_list, _msg);
     written = vsnprintf(_ctx->buffer + _ctx->offset,
-                        _ctx->info->len,
+                        (_ctx->info->len - _ctx->offset - 1),
                         _msg,
                         arg_list);
     _ctx->offset += written;

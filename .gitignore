@@ -1,1 +1,11 @@
+echo
+*.o
+*.log
+src/main.c
+bin/
+!inc/echo/
+
+compile_commands.json
+.cache/
+
 .DS_Store

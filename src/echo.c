@@ -6,7 +6,6 @@
 #include "echo.h"
 
 
-
 const char* lvl_strs[5] = {
     "DEBUG",
     "INFO",

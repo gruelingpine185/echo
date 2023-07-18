@@ -7,6 +7,51 @@
 #include <pthread.h>
 
 
+#ifdef ECHO_DISABLED
+    #define ECHO_DISABLE_DEBUG
+    #define ECHO_DISABLE_INFO
+    #define ECHO_DISABLE_WARN
+    #define ECHO_DISABLE_ERROR
+    #define ECHO_DISABLE_FATAL
+#endif // ECHO_DISABLED
+
+
+#ifdef ECHO_DISABLE_DEBUG
+    #define ECHO_DEBUG(_ctx_ptr, ...)
+#else
+    #define ECHO_DEBUG(_ctx_ptr, ...)                                       \
+        echo_log(_ctx_ptr, ECHO_LVL_DEBUG, __FILE__, __LINE__, __VA_ARGS__)
+#endif // ECHO_DISABLE_DEBUG
+
+#ifdef ECHO_DISABLE_INFO
+    #define ECHO_DEBUG(_ctx_ptr, ...)
+#else
+    #define ECHO_INFO(_ctx_ptr, ...)                                        \
+        echo_log(_ctx_ptr, ECHO_LVL_INFO, __FILE__, __LINE__, __VA_ARGS__)
+#endif // ECHO_DISABLE_INFO
+
+#ifdef ECHO_DISABLE_WARN
+    #define ECHO_WARN(_ctx_ptr, ...)
+#else
+    #define ECHO_WARN(_ctx_ptr, ...)                                        \
+        echo_log(_ctx_ptr, ECHO_LVL_WARN, __FILE__, __LINE__, __VA_ARGS__)
+#endif // ECHO_DISABLE_WARN
+
+#ifdef ECHO_DISABLE_ERROR
+    #define ECHO_ERROR(_ctx_ptr, ...)
+#else
+    #define ECHO_ERROR(_ctx_ptr, ...)                                       \
+        echo_log(_ctx_ptr, ECHO_LVL_ERROR, __FILE__, __LINE__, __VA_ARGS__)
+#endif // ECHO_DISABLE_ERROR
+
+#ifdef ECHO_DISABLE_FATAL
+    #define ECHO_FATAL(_ctx_ptr, ...)
+#else
+    #define ECHO_FATAL(_ctx_ptr, ...)                                       \
+        echo_log(_ctx_ptr, ECHO_LVL_FATAL, __FILE__, __LINE__, __VA_ARGS__)
+#endif // ECHO_DISABLE_FATAL
+
+
 typedef struct echo_ctx echo_ctx;
 typedef struct echo_info echo_info;
 

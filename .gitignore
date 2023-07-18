@@ -8,4 +8,6 @@ bin/
 compile_commands.json
 .cache/
 
+.vscode/
+
 .DS_Store

@@ -77,8 +77,6 @@ struct echo_ctx {
     echo_info* info;
     char* buffer;
     uint32_t offset;
-    uint32_t warnings;
-    uint32_t errors;
 };
 
 

@@ -27,8 +27,6 @@ int echo_create_ctx(echo_ctx* _ctx) {
 
     memset(_ctx->buffer, 0, _ctx->info->len);
     _ctx->offset = 0;
-    _ctx->warnings = 0;
-    _ctx->errors = 0;
     return 1;
 }
 

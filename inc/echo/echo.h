@@ -4,6 +4,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <pthread.h>
 
 
 typedef struct echo_ctx echo_ctx;
@@ -23,6 +24,8 @@ struct echo_info {
     FILE* fs;
     uint32_t len;
     float threshold;
+    int is_thread_safe;
+    pthread_mutex_t lock;
 };
 
 struct echo_ctx {

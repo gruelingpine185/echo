@@ -1,6 +1,7 @@
-# Echo
-
-Echo is a thread-safe logging library for C and C++ projects.
+<div align="center">
+    <img src="./assets/logo.svg" width="300px">
+    <p>A thread-safe logging library for C and C++ projects.</p>
+</div>
 
 ## Example
 

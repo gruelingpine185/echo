@@ -31,16 +31,24 @@ int main(void) {
     if(!echo_create_ctx(&ctx)) return 1;
 
     // Write your log messages
-    ECHO_INFO("Hello world from Echo!");
-    ECHO_DEBUG("Should have gotten an \'ECHO... Echo... echo...\'");
-    ECHO_WARN("No echo yet?");
-    ECHO_ERROR("Error[%d]: Echo is not echoing.", 32);
+    ECHO_INFO(&ctx, "Hello world from Echo!");
+    ECHO_DEBUG(&ctx, "Should have gotten an \'ECHO... Echo... echo...\'");
+    ECHO_WARN(&ctx, "No echo yet?");
+    ECHO_ERROR(&ctx, "Error[%d]: Echo is not echoing.", 32);
 
     // Don't forget to return resources
     echo_destroy_ctx(&ctx);
     fclose(file);
     return 0;
 }
+```
+
+This results in the following:
+```log
+main.c:26 [INFO]: Hello world from Echo!
+main.c:27 [DEBUG]: Should have gotten an 'ECHO... Echo... echo...' 2
+main.c:28 [WARN]: No echo yet?
+main.c:29 [ERROR]: Error[32]: Echo is not echoing.
 ```
 
 ## Documentation

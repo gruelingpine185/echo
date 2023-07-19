@@ -42,3 +42,11 @@ int main(void) {
     return 0;
 }
 ```
+
+## Documentation
+
+Coming Soon!
+
+## Contributions
+
+Contributions are welcomed and encouraged.

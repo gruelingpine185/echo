@@ -46,7 +46,7 @@ int main(void) {
 This results in the following:
 ```log
 main.c:26 [INFO]: Hello world from Echo!
-main.c:27 [DEBUG]: Should have gotten an 'ECHO... Echo... echo...' 2
+main.c:27 [DEBUG]: Should have gotten an 'ECHO... Echo... echo...'
 main.c:28 [WARN]: No echo yet?
 main.c:29 [ERROR]: Error[32]: Echo is not echoing.
 ```

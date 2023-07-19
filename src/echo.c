@@ -66,6 +66,13 @@ void echo_log(echo_ctx* _ctx,
     strncat(_ctx->buffer, "\n", _ctx->info->len - _ctx->offset - 1);
     va_end(arg_list);
     _ctx->offset++;
+    if(_lvl == ECHO_LVL_FATAL) {
+        if(_ctx->info->is_thread_safe) pthread_mutex_unlock(&_ctx->info->lock);
+
+        echo_destroy_ctx(_ctx);
+        exit(1);
+    }
+
     if(_ctx->info->is_thread_safe) pthread_mutex_unlock(&_ctx->info->lock);
 }
 
